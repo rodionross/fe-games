@@ -1,0 +1,104 @@
+.review-card {
+  margin: 0 0 17px 0;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  height: fit-content;
+  background-color: #faf9f7;
+}
+
+.review-img {
+  width: 300px;
+  height: 300px;
+  margin: 20px 0 10px 0;
+}
+
+.owner-img {
+  width: 100px;
+  height: 100px;
+}
+
+.hidden {
+  display: none;
+}
+
+.open {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 200px;
+  transition: all 0.5s;
+  position: relative;
+}
+.open h4 {
+  width: fit-content;
+  margin: 15px 0 0 20px;
+}
+
+.closed {
+  height: 0;
+  transition: all 0.5s;
+}
+
+.arrow-img-down {
+  height: 50px;
+  width: 50px;
+  transition: all 0.5s;
+}
+
+.arrow-img-up {
+  transform: rotate(180deg);
+  height: 50px;
+  width: 50px;
+  transition: all 0.5s;
+}
+
+.review-img-container {
+  position: relative;
+}
+.review-votes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -23px;
+  right: 0;
+  background-color: black;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  color: white;
+  font-size: 13px;
+}
+
+.arrow-img-down,
+.arrow-img-up {
+  cursor: pointer;
+}
+
+.user-img-name {
+  display: flex;
+  align-items: center;
+  margin: 15px 0 0 0;
+  padding: 0 10px 0 10px;
+}
+
+.owner-img {
+  border-radius: 50%;
+  margin: 0 20px 0 0;
+}
+
+.comment-img {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+}
+
+.comment-count {
+  position: absolute;
+  right: 29px;
+  bottom: 21px;
+}

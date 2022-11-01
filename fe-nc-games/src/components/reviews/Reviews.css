@@ -3,6 +3,7 @@
 }
 .top-three-container {
   position: relative;
+  height: 330px;
 }
 
 .top-three-container img {
@@ -94,10 +95,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
-}
-
-.form {
-  padding: 350px 0 0 0;
 }
 
 .dropdown {

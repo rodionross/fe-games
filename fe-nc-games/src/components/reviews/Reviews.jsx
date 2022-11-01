@@ -17,7 +17,6 @@ export const Reviews = () => {
   const [searchParams, setSearchParams] = useSearchParams({ limit: 100 });
 
   useEffect(() => {
-    console.log("useEffect ran");
     setLoading(true);
     const reviews = axios.get(
       `https://board-games-mern-app.herokuapp.com/api/reviews`,
@@ -62,7 +61,7 @@ export const Reviews = () => {
   if (loading) return <h3>loading</h3>;
   return (
     <section className="all-reviews-container">
-      {topThree ? (
+      {topThree.length !== 0 ? (
         <div className="top-three-container">
           {topThree.map((el, index) => {
             return (

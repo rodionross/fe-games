@@ -18,6 +18,7 @@ export const Reviews = () => {
 
   useEffect(() => {
     setLoading(true);
+    setSelectedCategory("");
     const reviews = axios.get(
       `https://board-games-mern-app.herokuapp.com/api/reviews`,
       { params: searchParams }

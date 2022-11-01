@@ -12,6 +12,7 @@
 }
 
 .top-three-card-0 {
+  min-height: 300px;
   position: absolute;
   top: 0;
   right: 40%;
@@ -22,16 +23,17 @@
     rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
     rgba(0, 0, 0, 0.09) 0px 32px 16px;
 
-  z-index: 2;
+  z-index: 1;
 }
 
 .top-three-card-1 {
+  min-height: 290px;
   position: absolute;
   top: 0;
   right: 50%;
   left: 30%;
   border-radius: 5px;
-  z-index: 1;
+
   background-color: #faf9f7;
   transition: all 0.7s;
 
@@ -41,12 +43,13 @@
 }
 
 .top-three-card-2 {
+  min-height: 290px;
   position: absolute;
   top: 0;
   right: 30%;
   left: 50%;
   border-radius: 5px;
-  z-index: 1;
+
   background-color: #faf9f7;
   transition: all 0.7s;
 
@@ -86,8 +89,43 @@
 }
 
 .reviews-container {
-  padding: 330px 20px 0 20px;
+  padding: 0 20px 0 20px;
+  margin: 50px 0 0 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
+}
+
+.form {
+  padding: 350px 0 0 0;
+}
+
+.dropdown {
+  font-size: 18px;
+  border: 1px solid rgb(170, 170, 170);
+  border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.form-btn {
+  background-color: rgb(38, 38, 38);
+  border: none;
+  color: white;
+  font-size: 18px;
+  margin: 0 0 0 6px;
+  border-radius: 5px;
+  width: 70px;
+  height: 34px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.form-btn:hover {
+  opacity: 0.9;
+}
+
+.form-btn:active {
+  opacity: 0.85;
 }

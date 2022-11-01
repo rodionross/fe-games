@@ -47,9 +47,11 @@ export const Reviews = () => {
   }, [searchParams]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    let params = { category: selectedCategory };
-    setSearchParams(params);
+    if (selectedCategory !== "select category") {
+      e.preventDefault();
+      let params = { category: selectedCategory };
+      setSearchParams(params);
+    }
   };
 
   const handleChange = (e) => {
@@ -84,6 +86,7 @@ export const Reviews = () => {
           name="categories"
           id="categories"
         >
+          <option value="select category">select category</option>
           {allCategories.map((cat) => {
             return (
               <option key={cat.slug} value={cat.slug}>

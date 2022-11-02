@@ -9,10 +9,10 @@ export const SingleReview = () => {
   const [review, setReview] = useState({});
   const [comments, setComments] = useState([]);
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     const review = axios.get(
       `https://board-games-mern-app.herokuapp.com/api/reviews/${id}`
     );
@@ -25,7 +25,7 @@ export const SingleReview = () => {
 
     Promise.all([review, comments, users])
       .then((res) => {
-        setLoading(false);
+        setIsLoading(false);
         setReview(res[0].data.review);
         if (res[1].data.comments) {
           setComments(res[1].data.comments);
@@ -39,7 +39,7 @@ export const SingleReview = () => {
       });
   }, [id]);
 
-  if (loading) return <h2>Loading</h2>;
+  if (isLoading) return <h2>Loading</h2>;
   return (
     <section className="single-review-page">
       <h2>{review.title}</h2>

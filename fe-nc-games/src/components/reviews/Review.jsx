@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Review.css";
 
 export const Review = (props) => {
@@ -8,11 +9,13 @@ export const Review = (props) => {
   return (
     <div className="review-card">
       <div className="review-img-container">
-        <img
-          className="review-img"
-          src={review.review_img_url}
-          alt={review.owner}
-        />
+        <Link to={`/review/${review.review_id}`}>
+          <img
+            className="review-img"
+            src={review.review_img_url}
+            alt={review.owner}
+          />
+        </Link>
         <h4 className="review-votes">{review.votes} ★</h4>
       </div>
       <h4>{review.title}</h4>

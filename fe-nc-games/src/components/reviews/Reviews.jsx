@@ -59,7 +59,7 @@ export const Reviews = () => {
     setSelectedCategory(value);
   };
 
-  if (loading) return <h3>loading</h3>;
+  if (loading) return <h2>Loading...</h2>;
   return (
     <section className="all-reviews-container">
       {topThree.length !== 0 ? (

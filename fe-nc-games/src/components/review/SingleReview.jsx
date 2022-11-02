@@ -39,7 +39,7 @@ export const SingleReview = () => {
       });
   }, [id]);
 
-  if (isLoading) return <h2>Loading</h2>;
+  if (isLoading) return <h2>Loading...</h2>;
   return (
     <section className="single-review-page">
       <h2>{review.title}</h2>

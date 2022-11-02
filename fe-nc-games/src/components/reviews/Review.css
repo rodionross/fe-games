@@ -104,3 +104,34 @@
   right: 29px;
   bottom: 21px;
 }
+
+.review-img-container h4 {
+  cursor: pointer;
+}
+
+.thumbs-up {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 30px;
+  right: 5px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+.thumbs-up:active {
+  transform: translateY(-2px);
+}
+
+.thumbs-down {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 70px;
+  right: 5px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.thumbs-down:active {
+  transform: translateY(2px);
+}

@@ -29,3 +29,12 @@
 .navbar ul a:hover {
   color: rgb(170, 170, 170);
 }
+
+.navbar-img {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  border-radius: 50%;
+  top: 5px;
+  left: 25px;
+}

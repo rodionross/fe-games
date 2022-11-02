@@ -1,0 +1,63 @@
+.single-user {
+  border-radius: 5px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  margin: 0 0 90px 0;
+}
+
+.single-user-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+.name-img-container {
+  cursor: pointer;
+}
+.single-user-name {
+  margin: 15px 0 10px 0;
+}
+
+.login-input {
+  width: 90%;
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  height: 24px;
+}
+
+.login-btn {
+  width: 30%;
+  margin: 0 0 10px 0;
+  height: 24px;
+  border: none;
+  background-color: rgb(26, 26, 26);
+  color: white;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.login-btn:hover {
+  opacity: 0.85;
+}
+.login-btn:active {
+  font-size: 14px;
+}
+
+.login-form {
+  width: 100%;
+  height: 70px;
+  transition: height 0.2s, opacity 1s;
+}
+
+.hide-login-form {
+  height: 0;
+  opacity: 0;
+  transition: height 0.3s, opacity 0.01s;
+}

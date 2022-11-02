@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import { Review } from "./Review";
-
 import "./Reviews.css";
 import { useSearchParams } from "react-router-dom";
 
@@ -59,6 +57,17 @@ export const Reviews = () => {
     setSelectedCategory(value);
   };
 
+  const handleTopThreeVotes = (review, votes) => {
+    topThree.forEach((el, index) => {
+      if (el.review_id === review.review_id) {
+        let newEl = { ...el, votes: votes };
+        let newArr = [...topThree];
+        newArr[index] = newEl;
+        setTopThree(newArr);
+      }
+    });
+  };
+
   if (loading) return <h2>Loading...</h2>;
   return (
     <section className="all-reviews-container">
@@ -110,6 +119,7 @@ export const Reviews = () => {
               key={review.review_id}
               review={review}
               owner={users.find((user) => user.username === review.owner)}
+              handleTopThreeVotes={handleTopThreeVotes}
             />
           );
         })}

@@ -1,0 +1,112 @@
+.single-review-container {
+  background-color: rgb(250, 249, 247);
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: 0 auto 0 auto;
+  height: 700px;
+}
+
+.single-review-top img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.single-review-top h4 {
+  color: white;
+  background-color: black;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.single-review-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  padding: 10px 0 0 0;
+}
+
+.single-review-left p {
+  width: 400px;
+  text-align: left;
+}
+
+.single-review-top {
+  position: relative;
+  height: 420px;
+  width: 420px;
+  margin: 0 0 10px 0;
+}
+
+.single-review-right {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: scroll;
+  padding: 10px 10px 10px 10px;
+}
+
+.single-review-comment-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 20px 10px 0;
+}
+
+.single-comment-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 5px;
+  background-color: rgb(245, 245, 245);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.single-comment-card-container p {
+  text-align: left;
+  padding: 0 0 20px 20px;
+}
+
+.single-comment-card-top {
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1px rgb(208, 208, 208);
+  margin: 0 0 10px 0;
+  padding: 5px 0 0 5px;
+}
+
+.single-review-page h2 {
+  margin: 0 0 20px 0;
+  font-size: 30px;
+}
+
+.single-review-designer-category {
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+  margin: 0 0 10px 0;
+  padding: 0 10px 0 10px;
+}
+.single-review-card {
+  border-radius: 5px;
+  background-color: rgb(245, 245, 245);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  width: fit-content;
+}
+
+.single-review-card p {
+  padding: 10px;
+}

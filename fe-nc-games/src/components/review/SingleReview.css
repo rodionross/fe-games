@@ -49,13 +49,23 @@
   margin: 0 0 10px 0;
 }
 
-.single-review-right {
-  width: 40%;
+.single-review-righ-side-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 40%;
+}
+
+.single-review-right {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
   overflow: scroll;
   padding: 10px 10px 10px 10px;
+  margin: 20px 0 0 0;
+  position: relative;
 }
 
 .single-review-comment-img {
@@ -88,7 +98,7 @@
 }
 
 .single-review-page h2 {
-  margin: 0 0 30px 0;
+  margin: 0 0 40px 0;
   font-size: 30px;
 }
 
@@ -137,4 +147,36 @@
 
 .single-review-thumbs-down:active {
   transform: translateY(2px);
+}
+
+.add-comment-btn {
+  width: 120px;
+  height: 40px;
+  border: none;
+  background-color: rgb(26, 26, 26);
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-comment-btn:hover {
+  opacity: 0.85;
+}
+.add-comment-btn:active {
+  font-size: 15px;
+}
+
+#comment-textarea {
+  resize: none;
+  width: 450px;
+}
+
+.add-comment-modal {
+  width: 100%;
+}
+
+.modal-form {
+  margin: 10px 0 0 0;
 }

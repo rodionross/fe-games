@@ -18,6 +18,8 @@ export const SingleReview = () => {
     { upVote: true, count: 0 },
     { downVote: true, count: 0 },
   ]);
+  const [showModal, setShowModal] = useState(false);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -90,6 +92,15 @@ export const SingleReview = () => {
     }
   };
 
+  const handleInput = (e) => {
+    const { value } = e.target;
+    setInput(value);
+  };
+
+  const handleClick = () => {
+    setShowModal(!showModal);
+  };
+
   if (isLoading) return <h2>Loading...</h2>;
   return (
     <section className="single-review-page">
@@ -133,28 +144,52 @@ export const SingleReview = () => {
             <p>{review.review_body}</p>
           </div>
         </div>
-        {comments.length > 0 ? (
-          <div className="single-review-right">
-            {comments.map((comment) => {
-              return (
-                <div
-                  key={comment.comment_id}
-                  className="single-comment-card-container"
-                >
-                  <div className="single-comment-card-top">
-                    <img
-                      className="single-review-comment-img"
-                      src={users[comment.author]}
-                      alt={comment.author}
-                    />
-                    <h4>{comment.author}</h4>
+        <div className="single-review-righ-side-container">
+          <button className="add-comment-btn" onClick={handleClick}>
+            {!showModal
+              ? "add comment"
+              : showModal && input !== ""
+              ? "submit"
+              : "close"}
+          </button>
+          {showModal ? (
+            <div className="add-comment-modal">
+              <form className="modal-form">
+                <textarea
+                  name="comment"
+                  id="comment-textarea"
+                  cols="10"
+                  rows="7"
+                  placeholder="write comment..."
+                  value={input}
+                  onChange={handleInput}
+                ></textarea>
+              </form>
+            </div>
+          ) : null}
+          {comments.length > 0 ? (
+            <div className="single-review-right">
+              {comments.map((comment) => {
+                return (
+                  <div
+                    key={comment.comment_id}
+                    className="single-comment-card-container"
+                  >
+                    <div className="single-comment-card-top">
+                      <img
+                        className="single-review-comment-img"
+                        src={users[comment.author]}
+                        alt={comment.author}
+                      />
+                      <h4>{comment.author}</h4>
+                    </div>
+                    <p>{comment.body}</p>
                   </div>
-                  <p>{comment.body}</p>
-                </div>
-              );
-            })}
-          </div>
-        ) : null}
+                );
+              })}
+            </div>
+          ) : null}
+        </div>
       </div>
     </section>
   );

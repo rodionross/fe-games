@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./Review.css";
 import { useContext } from "react";
 import { ActiveUserContext } from "../contexts/UserContext";
+import { Popup } from "../popup/Popup";
 
 export const Review = (props) => {
   const { activeUser } = useContext(ActiveUserContext);
@@ -14,8 +15,12 @@ export const Review = (props) => {
     { upVote: true, count: 0 },
     { downVote: true, count: 0 },
   ]);
+  const [popup, setPopup] = useState(false);
 
   const handleUpVote = () => {
+    if (!activeUser) {
+      return setPopup(!popup);
+    }
     const newArr = [...canVote];
 
     if (canVote[0].count < 1) {
@@ -38,6 +43,9 @@ export const Review = (props) => {
   };
 
   const handleDownVote = () => {
+    if (!activeUser) {
+      return setPopup(!popup);
+    }
     const newArr = [...canVote];
 
     if (canVote[1].count < 1) {
@@ -59,6 +67,10 @@ export const Review = (props) => {
     }
   };
 
+  const handlePopup = () => {
+    setPopup(!popup);
+  };
+
   return (
     <div className="review-card">
       <div className="review-img-container">
@@ -74,17 +86,13 @@ export const Review = (props) => {
           src="https://cdn-icons-png.flaticon.com/512/2415/2415418.png"
           alt="thumbs"
           className="thumbs-up"
-          onClick={
-            activeUser ? (canVote[0].upVote ? handleUpVote : null) : null
-          }
+          onClick={handleUpVote}
         />
         <img
           src="https://cdn-icons-png.flaticon.com/512/2415/2415402.png"
           alt="thumbs"
           className="thumbs-down"
-          onClick={
-            activeUser ? (canVote[1].downVote ? handleDownVote : null) : null
-          }
+          onClick={handleDownVote}
         />
       </div>
       <h4>{review.title}</h4>
@@ -121,6 +129,7 @@ export const Review = (props) => {
         src="https://cdn-icons-png.flaticon.com/512/656/656979.png"
         alt="arrow"
       />
+      {popup ? <Popup msg="Login to vote" whenClicked={handlePopup} /> : null}
     </div>
   );
 };

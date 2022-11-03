@@ -7,7 +7,7 @@
   height: 700px;
 }
 
-.single-review-top img {
+.single-review-review_img_url {
   width: 100%;
   height: 100%;
   border-top-left-radius: 5px;
@@ -25,8 +25,8 @@
   align-items: center;
   font-size: 18px;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: -20px;
+  right: -1px;
 }
 
 .single-review-left {
@@ -88,7 +88,7 @@
 }
 
 .single-review-page h2 {
-  margin: 0 0 20px 0;
+  margin: 0 0 30px 0;
   font-size: 30px;
 }
 
@@ -109,4 +109,32 @@
 
 .single-review-card p {
   padding: 10px;
+}
+
+.single-review-thumbs-up {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 35px;
+  right: -35px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.single-review-thumbs-up:active {
+  transform: translateY(-2px);
+}
+
+.single-review-thumbs-down {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 80px;
+  right: -35px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.single-review-thumbs-down:active {
+  transform: translateY(2px);
 }

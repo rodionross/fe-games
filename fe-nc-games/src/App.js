@@ -4,17 +4,24 @@ import { Reviews } from "./components/reviews/Reviews";
 import { Navbar } from "./components/navbar/Navbar";
 import { Home } from "./components/home/Home";
 import { SingleReview } from "./components/review/SingleReview";
+import { Login } from "./components/users/Login";
+import { ActiveUserContext } from "./components/contexts/UserContext";
+import { useState } from "react";
 
 function App() {
+  const [activeUser, setActiveUser] = useState(null);
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/review/:id" element={<SingleReview />} />
-          <Route path="/reviews/categories" element={<Reviews />} />
-        </Routes>
+        <ActiveUserContext.Provider value={{ activeUser, setActiveUser }}>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/review/:id" element={<SingleReview />} />
+            <Route path="/reviews/categories" element={<Reviews />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </ActiveUserContext.Provider>
       </div>
     </BrowserRouter>
   );

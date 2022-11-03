@@ -6,30 +6,41 @@
   right: 0;
   left: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 10;
 }
 
 .popup-inside {
-  background-color: rgb(16, 16, 16);
   border-radius: 5px;
-  width: 40%;
-  height: 20%;
+  width: 100%;
+  height: fit-content;
   color: white;
+  background-color: rgb(61, 61, 61);
 }
 
 .popup-msg {
-  margin: 40px 0 40px 0 !important;
+  margin: 5px auto 0 auto;
+  color: white;
+  width: fit-content;
+  height: 44px;
+  background-color: rgb(28, 28, 28);
+  font-size: 32px;
+  padding: 3px 10px 3px 10px;
+  border-radius: 5px;
 }
 
 .popup-btn {
+  background-color: rgb(28, 28, 28);
+  color: white;
   border: none;
   border-radius: 5px;
-  width: 50px;
-  height: 30px;
+  width: fit-content;
+  height: 42px;
   font-size: 22px;
-  margin: 0 0 20px 0 !important;
+  margin: 0 0 5px 0;
+  padding: 0 10px 0 10px;
   cursor: pointer;
   transition: all 0.2s;
 }

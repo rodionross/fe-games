@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import "./SingleReview.css";
 import { useContext } from "react";
 import { ActiveUserContext } from "../contexts/UserContext";
+import { Comment } from "../comment/Comment";
+import { Popup } from "../popup/Popup";
 
 export const SingleReview = () => {
   const { activeUser } = useContext(ActiveUserContext);
@@ -18,8 +20,11 @@ export const SingleReview = () => {
     { upVote: true, count: 0 },
     { downVote: true, count: 0 },
   ]);
-  const [showModal, setShowModal] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [input, setInput] = useState("");
+  const [optimisticComments, setOptimisticComments] = useState([]);
+  const [popup, setPopup] = useState(false);
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -51,6 +56,10 @@ export const SingleReview = () => {
   }, [id]);
 
   const handleUpVote = () => {
+    if (!activeUser) {
+      setMsg("Login to vote");
+      return setPopup(!popup);
+    }
     const newArr = [...canVote];
 
     if (canVote[0].count < 1) {
@@ -72,6 +81,10 @@ export const SingleReview = () => {
   };
 
   const handleDownVote = () => {
+    if (!activeUser) {
+      setMsg("Login to vote");
+      return setPopup(!popup);
+    }
     const newArr = [...canVote];
 
     if (canVote[1].count < 1) {
@@ -98,7 +111,29 @@ export const SingleReview = () => {
   };
 
   const handleClick = () => {
-    setShowModal(!showModal);
+    if (!activeUser) {
+      setMsg("Login to comment");
+      return setPopup(!popup);
+    }
+    if (showForm && input !== "") {
+      let comment = {};
+      comment.author = activeUser.username;
+      comment.body = input;
+
+      let newOptComments = [...optimisticComments];
+      newOptComments.push(comment);
+      setOptimisticComments(newOptComments);
+
+      axios.post(
+        `https://board-games-mern-app.herokuapp.com/api/reviews/${id}/comments`,
+        { username: activeUser.username, body: input }
+      );
+    }
+    setShowForm(!showForm);
+  };
+
+  const handlePopup = () => {
+    setPopup(!popup);
   };
 
   if (isLoading) return <h2>Loading...</h2>;
@@ -119,21 +154,13 @@ export const SingleReview = () => {
                 src="https://cdn-icons-png.flaticon.com/512/2415/2415418.png"
                 alt="thumbs-up"
                 className="single-review-thumbs-up"
-                onClick={
-                  activeUser ? (canVote[0].upVote ? handleUpVote : null) : null
-                }
+                onClick={handleUpVote}
               />
               <img
                 src="https://cdn-icons-png.flaticon.com/512/2415/2415402.png"
                 alt="thumbs-down"
                 className="single-review-thumbs-down"
-                onClick={
-                  activeUser
-                    ? canVote[1].downVote
-                      ? handleDownVote
-                      : null
-                    : null
-                }
+                onClick={handleDownVote}
               />
             </div>
             <div className="single-review-designer-category">
@@ -146,13 +173,13 @@ export const SingleReview = () => {
         </div>
         <div className="single-review-righ-side-container">
           <button className="add-comment-btn" onClick={handleClick}>
-            {!showModal
+            {!showForm
               ? "add comment"
-              : showModal && input !== ""
+              : showForm && input !== ""
               ? "submit"
               : "close"}
           </button>
-          {showModal ? (
+          {showForm ? (
             <div className="add-comment-modal">
               <form className="modal-form">
                 <textarea
@@ -169,28 +196,29 @@ export const SingleReview = () => {
           ) : null}
           {comments.length > 0 ? (
             <div className="single-review-right">
+              {optimisticComments.map((comment) => {
+                return (
+                  <Comment
+                    key={comment.author + Math.random() * 10000}
+                    comment={comment}
+                    users={users}
+                  />
+                );
+              })}
               {comments.map((comment) => {
                 return (
-                  <div
+                  <Comment
                     key={comment.comment_id}
-                    className="single-comment-card-container"
-                  >
-                    <div className="single-comment-card-top">
-                      <img
-                        className="single-review-comment-img"
-                        src={users[comment.author]}
-                        alt={comment.author}
-                      />
-                      <h4>{comment.author}</h4>
-                    </div>
-                    <p>{comment.body}</p>
-                  </div>
+                    comment={comment}
+                    users={users}
+                  />
                 );
               })}
             </div>
           ) : null}
         </div>
       </div>
+      {popup ? <Popup msg={msg} whenClicked={handlePopup} /> : null}
     </section>
   );
 };

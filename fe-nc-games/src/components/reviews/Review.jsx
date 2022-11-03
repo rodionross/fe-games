@@ -10,36 +10,53 @@ export const Review = (props) => {
   const { review, owner, handleTopThreeVotes } = props;
   const [hidden, setHidden] = useState(true);
   const [votes, setVotes] = useState(review.votes);
-  const [canVote, setCanVote] = useState({ upVote: true, downVote: true });
+  const [canVote, setCanVote] = useState([
+    { upVote: true, count: 0 },
+    { downVote: true, count: 0 },
+  ]);
 
   const handleUpVote = () => {
-    const newVote = votes + 1;
-    setVotes(newVote);
-    axios.patch(
-      `https://board-games-mern-app.herokuapp.com/api/reviews/${review.review_id}`,
-      {
-        inc_votes: 1,
-      }
-    );
-    setCanVote((prev) => {
-      return { ...prev, upVote: false, downVote: true };
-    });
-    handleTopThreeVotes(review, newVote);
+    const newArr = [...canVote];
+
+    if (canVote[0].count < 1) {
+      const newVote = votes + 1;
+      setVotes(newVote);
+      axios.patch(
+        `https://board-games-mern-app.herokuapp.com/api/reviews/${review.review_id}`,
+        {
+          inc_votes: 1,
+        }
+      );
+      newArr[0].count += 1;
+      newArr[1].downVote = true;
+      newArr[1].count -= 1;
+      setCanVote(newArr);
+      handleTopThreeVotes(review, newVote);
+    } else {
+      newArr[0].upVote = false;
+    }
   };
 
   const handleDownVote = () => {
-    const newVote = votes - 1;
-    setVotes(newVote);
-    axios.patch(
-      `https://board-games-mern-app.herokuapp.com/api/reviews/${review.review_id}`,
-      {
-        inc_votes: -1,
-      }
-    );
-    setCanVote((prev) => {
-      return { ...prev, upVote: true, downVote: false };
-    });
-    handleTopThreeVotes(review, newVote);
+    const newArr = [...canVote];
+
+    if (canVote[1].count < 1) {
+      const newVote = votes - 1;
+      setVotes(newVote);
+      axios.patch(
+        `https://board-games-mern-app.herokuapp.com/api/reviews/${review.review_id}`,
+        {
+          inc_votes: -1,
+        }
+      );
+      newArr[0].upVote = true;
+      newArr[0].count -= 1;
+      newArr[1].count += 1;
+      setCanVote(newArr);
+      handleTopThreeVotes(review, newVote);
+    } else {
+      newArr[1].upVote = false;
+    }
   };
 
   return (
@@ -57,14 +74,16 @@ export const Review = (props) => {
           src="https://cdn-icons-png.flaticon.com/512/2415/2415418.png"
           alt="thumbs"
           className="thumbs-up"
-          onClick={activeUser ? (canVote.upVote ? handleUpVote : null) : null}
+          onClick={
+            activeUser ? (canVote[0].upVote ? handleUpVote : null) : null
+          }
         />
         <img
           src="https://cdn-icons-png.flaticon.com/512/2415/2415402.png"
           alt="thumbs"
           className="thumbs-down"
           onClick={
-            activeUser ? (canVote.downVote ? handleDownVote : null) : null
+            activeUser ? (canVote[1].downVote ? handleDownVote : null) : null
           }
         />
       </div>

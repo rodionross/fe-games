@@ -8,7 +8,6 @@ export const Popup = ({ msg, whenClicked }) => {
 
   const handleClick = () => {
     whenClicked();
-    console.log("clicked");
   };
 
   return (

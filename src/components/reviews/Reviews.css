@@ -97,6 +97,27 @@
   gap: 20px;
 }
 
+@media screen and (max-width: 1600px) {
+  .reviews-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .reviews-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .top-three-container {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .reviews-container {
+    grid-template-columns: 1fr;
+  }
+}
+
 .dropdown {
   font-size: 18px;
   border: 1px solid rgb(170, 170, 170);

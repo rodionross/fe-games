@@ -6,17 +6,15 @@ import { useSearchParams } from "react-router-dom";
 
 export const Reviews = () => {
   const [topThree, setTopThree] = useState([]);
-
   const [allReviews, setAllReviews] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [allCategories, setAllCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams({ limit: 100 });
+  const [selectedParams, setSelectedParams] = useState({ limit: 100 });
+  const [searchParams, setSearchParams] = useSearchParams(selectedParams);
 
   useEffect(() => {
     setLoading(true);
-    setSelectedCategory("");
     const reviews = axios.get(
       `https://board-games-mern-app.herokuapp.com/api/reviews`,
       { params: searchParams }
@@ -45,16 +43,23 @@ export const Reviews = () => {
   }, [searchParams]);
 
   const handleSubmit = (e) => {
-    if (selectedCategory !== "select category") {
-      e.preventDefault();
-      let params = { category: selectedCategory };
-      setSearchParams(params);
-    }
+    e.preventDefault();
+
+    setSearchParams(selectedParams);
   };
 
   const handleChange = (e) => {
-    const { value } = e.target;
-    setSelectedCategory(value);
+    const { id, value } = e.target;
+
+    if (
+      value !== "select category" &&
+      value !== "sort by" &&
+      value !== "order"
+    ) {
+      setSelectedParams((prev) => {
+        return { ...prev, [id]: value };
+      });
+    }
   };
 
   const handleTopThreeVotes = (review, votes) => {
@@ -92,8 +97,8 @@ export const Reviews = () => {
         <select
           onChange={handleChange}
           className="dropdown"
-          name="categories"
-          id="categories"
+          name="category"
+          id="category"
         >
           <option value="select category">select category</option>
           {allCategories.map((cat) => {
@@ -103,6 +108,28 @@ export const Reviews = () => {
               </option>
             );
           })}
+        </select>
+        <select
+          onChange={handleChange}
+          className="dropdown"
+          name="sort_by"
+          id="sort_by"
+        >
+          <option value="sort by">sort by</option>
+          <option value="created_at">date</option>
+          <option value="comment_count">comment count</option>
+          <option value="votes">votes</option>
+        </select>
+
+        <select
+          onChange={handleChange}
+          className="dropdown"
+          name="order"
+          id="order"
+        >
+          <option value="order">order</option>
+          <option value="asc">asc</option>
+          <option value="desc">desc</option>
         </select>
 
         <input

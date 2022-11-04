@@ -6,7 +6,6 @@ import { useSearchParams } from "react-router-dom";
 
 export const Reviews = () => {
   const [topThree, setTopThree] = useState([]);
-
   const [allReviews, setAllReviews] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);

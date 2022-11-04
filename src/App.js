@@ -7,6 +7,7 @@ import { SingleReview } from "./components/review/SingleReview";
 import { Login } from "./components/users/Login";
 import { ActiveUserContext } from "./components/contexts/UserContext";
 import { useState } from "react";
+import { NotFound } from "./components/not_found/NotFound";
 
 function App() {
   const [activeUser, setActiveUser] = useState(null);
@@ -20,6 +21,7 @@ function App() {
             <Route path="/review/:id" element={<SingleReview />} />
             <Route path="/reviews/categories" element={<Reviews />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/*" element={<NotFound />} />
           </Routes>
         </ActiveUserContext.Provider>
       </div>

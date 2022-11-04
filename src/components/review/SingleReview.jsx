@@ -25,12 +25,17 @@ export const SingleReview = () => {
   const [optimisticComments, setOptimisticComments] = useState([]);
   const [popup, setPopup] = useState(false);
   const [msg, setMsg] = useState("");
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
+    setNotFound(false);
     setIsLoading(true);
-    const review = axios.get(
-      `https://board-games-mern-app.herokuapp.com/api/reviews/${id}`
-    );
+    const review = axios
+      .get(`https://board-games-mern-app.herokuapp.com/api/reviews/${id}`)
+      .catch((err) => {
+        setNotFound(true);
+      });
+
     const comments = axios.get(
       `https://board-games-mern-app.herokuapp.com/api/reviews/${id}/comments`
     );
@@ -119,6 +124,7 @@ export const SingleReview = () => {
       let comment = {};
       comment.author = activeUser.username;
       comment.body = input;
+      comment.id = activeUser.username + Math.random() * 10000;
 
       let newOptComments = [...optimisticComments];
       newOptComments.push(comment);
@@ -128,6 +134,7 @@ export const SingleReview = () => {
         `https://board-games-mern-app.herokuapp.com/api/reviews/${id}/comments`,
         { username: activeUser.username, body: input }
       );
+      setInput("");
     }
     setShowForm(!showForm);
   };
@@ -136,6 +143,40 @@ export const SingleReview = () => {
     setPopup(!popup);
   };
 
+  const handleComments = (comment, comment_id) => {
+    if (!parseInt(comment_id)) {
+      const filteredOptimisticComments = optimisticComments.filter(
+        (comment) => comment.id !== comment_id
+      );
+      setOptimisticComments(filteredOptimisticComments);
+
+      axios
+        .get(
+          `https://board-games-mern-app.herokuapp.com/api/reviews/${id}/comments`
+        )
+        .then(({ data }) => {
+          return data.comments.filter(
+            (el) => el.author === comment.author && el.body === comment.body
+          );
+        })
+        .then((res) => {
+          axios.delete(
+            `https://board-games-mern-app.herokuapp.com/api/comments/${res[0].comment_id}`
+          );
+        });
+    } else {
+      const filteredComments = comments.filter(
+        (comment) => comment.comment_id !== comment_id
+      );
+      setComments(filteredComments);
+
+      axios.delete(
+        `https://board-games-mern-app.herokuapp.com/api/comments/${comment_id}`
+      );
+    }
+  };
+
+  if (notFound) return <h2>404: Review Not Found</h2>;
   if (isLoading) return <h2>Loading...</h2>;
   return (
     <section className="single-review-page">
@@ -167,7 +208,6 @@ export const SingleReview = () => {
               <h4>{review.designer}</h4>
               <h4>{review.category}</h4>
             </div>
-
             <p>{review.review_body}</p>
           </div>
         </div>
@@ -199,9 +239,12 @@ export const SingleReview = () => {
               {optimisticComments.map((comment) => {
                 return (
                   <Comment
-                    key={comment.author + Math.random() * 10000}
+                    key={comment.id}
                     comment={comment}
                     users={users}
+                    activeUser={activeUser}
+                    handleComments={handleComments}
+                    id={comment.id}
                   />
                 );
               })}
@@ -211,6 +254,9 @@ export const SingleReview = () => {
                     key={comment.comment_id}
                     comment={comment}
                     users={users}
+                    activeUser={activeUser}
+                    handleComments={handleComments}
+                    id={comment.comment_id}
                   />
                 );
               })}

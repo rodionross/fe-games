@@ -96,6 +96,7 @@
   border-bottom: solid 1px rgb(208, 208, 208);
   margin: 0 0 10px 0;
   padding: 5px 0 0 5px;
+  position: relative;
 }
 
 .single-review-page h2 {
@@ -180,4 +181,27 @@
 
 .modal-form {
   margin: 10px 0 0 0;
+}
+
+.comment-delete-button {
+  width: 70px;
+  height: 24px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: none;
+  background-color: rgb(26, 26, 26);
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.comment-delete-button:hover {
+  opacity: 0.85;
+  background-color: rgb(255, 40, 40);
+}
+.comment-delete-button:active {
+  font-size: 15px;
 }

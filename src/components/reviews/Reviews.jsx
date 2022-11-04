@@ -12,13 +12,18 @@ export const Reviews = () => {
   const [allCategories, setAllCategories] = useState([]);
   const [selectedParams, setSelectedParams] = useState({ limit: 100 });
   const [searchParams, setSearchParams] = useSearchParams(selectedParams);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
+    setError(false);
     setLoading(true);
-    const reviews = axios.get(
-      `https://board-games-mern-app.herokuapp.com/api/reviews`,
-      { params: searchParams }
-    );
+    const reviews = axios
+      .get(`https://board-games-mern-app.herokuapp.com/api/reviews`, {
+        params: searchParams,
+      })
+      .catch((err) => {
+        setError(true);
+      });
     const users = axios.get(
       "https://board-games-mern-app.herokuapp.com/api/users"
     );
@@ -72,7 +77,7 @@ export const Reviews = () => {
       }
     });
   };
-
+  if (error) return <h2>400: Bad Request</h2>;
   if (loading) return <h2>Loading...</h2>;
   return (
     <section className="all-reviews-container">
